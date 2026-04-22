@@ -1,0 +1,28 @@
+---
+const { song } = Astro.props;
+---
+
+<div class="song-card" id={song._id}>
+  <img src={song.album.image.url} alt={song.album.image.url} class="song-cover w-20 h-20 " />
+  <div class="song-info">
+    <h3 class="song-title">{song.title}</h3>
+    <p class="song-artist">{song.author.name}</p>
+  </div>
+</div>
+
+
+<script define:vars={{ song }}>
+    const container = document.getElementById(song._id);
+    const player = document.getElementById("audioPlayer");
+
+    container.addEventListener('click', () => {
+        player.src = song.audio.url; // 
+        player.play();
+
+        const event = new CustomEvent('playSong', {
+            detail: { song }
+        });
+
+        window.dispatchEvent(event);
+    });
+</script>
