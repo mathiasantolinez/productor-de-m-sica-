@@ -1,4 +1,4 @@
-<div class="cursor-pointer">
+<!-- <div class="cursor-pointer">
     <div class="py-5 gap-4">
         <div>
             <img alt="" class="w-56 h-56 rounded-xl" id="currentSongCover" src="" />
@@ -8,16 +8,17 @@
             <p class="text-gray-500" id="currentSongArtist"></p>
         </div>
     </div>
-</div>
+</div> -->
 
 <audio id="audioPlayer" src=""></audio>
 
 <script>
     window.addEventListener('playSong', (event) => {
         const { song } = event.detail;
-
-        document.getElementById('currentSongCover').src = song.album.image.url;
-        document.getElementById('currentSongTitle').textContent = song.title;
-        document.getElementById('currentSongArtist').textContent = song.author.name;
+        document.getElementById('audioPlayer').src = song.audio.url;
+        document.getElementById('audioPlayer').play();
+        // document.getElementById('currentSongCover').src = song.album.image.url;
+        // document.getElementById('currentSongTitle').textContent = song.title;
+        // document.getElementById('currentSongArtist').textContent = song.author.name;
     });
 </script>
