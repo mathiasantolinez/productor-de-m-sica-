@@ -2,27 +2,35 @@
 const { song } = Astro.props;
 ---
 
-<div class="song-card" id={song._id}>
-  <img src={song.album.image.url} alt={song.album.image.url} class="song-cover w-20 h-20 " />
-  <div class="song-info">
-    <h3 class="song-title">{song.title}</h3>
-    <p class="song-artist">{song.author.name}</p>
+<div
+  id={song._id}
+  class="bg-gray-100 rounded-2xl p-3 flex gap-4 items-center border-l-4 border-indigo-600"
+>
+  <div class="rounded-lg w-10 h-10 overflow-hidden bg-black">
+    <img
+      src={song.album.image.url}
+      class="w-full h-full object-cover opacity-80"
+    />
   </div>
+  <div class="flex-1">
+    <p class="font-bold text-xs">{song.title}</p>
+    <p class="text-gray-400 text-[10px]">{song.author.name}</p>
+  </div>
+  <p class="text-indigo-600 text-[10px] font-bold">4:15</p>
 </div>
 
-
 <script define:vars={{ song }}>
-    const container = document.getElementById(song._id);
-    const player = document.getElementById("audioPlayer");
+  const container = document.getElementById(song._id);
+  const player = document.getElementById("audioPlayer");
 
-    container.addEventListener('click', () => {
-        player.src = song.audio.url; // 
-        player.play();
+  container.addEventListener("click", () => {
+    player.src = song.audio.url; //
+    player.play();
 
-        const event = new CustomEvent('playSong', {
-            detail: { song }
-        });
-
-        window.dispatchEvent(event);
+    const event = new CustomEvent("playSong", {
+      detail: { song },
     });
+
+    window.dispatchEvent(event);
+  });
 </script>
